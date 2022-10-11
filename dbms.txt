@@ -1,0 +1,120 @@
+use nm19is147
+create table person
+
+(
+
+  DRIVER_ID VARCHAR(30),
+
+ NAME VARCHAR(10),
+
+ ADDRESS VARCHAR(30),
+
+ PRIMARY KEY(DRIVER_ID)
+
+)
+insert into person values('Did1','Lionel','Karwar')
+insert into person values('Did2','Cristiano','Karkala')
+insert into person values('Did3','Benzema','Karkala')
+insert into person values('Did4','Kylian','Karwar')
+
+create table car
+(
+
+REGNO VARCHAR(20),
+
+MODEL VARCHAR(20),
+
+YEAR INT,
+
+PRIMARY KEY(REGNO)
+)
+
+insert into car values('KA 20 S 6121', 'TOYOTA', 2005)
+insert into car values('KA 19 A 8200', 'MARCEDES', 2006)
+insert into car values('KA 20 B 3728', 'LEXUS', 2008)
+insert into car values('KA 19 T 1082', 'TOYOTA', 2012)
+insert into car values('KA 20 E 4284', 'MARUTI', 2008)
+insert into car values('KA 19 Q 8741', 'TOYOTA', 2009)
+insert into car values('KA 20 M 1986', 'MAHINDRA', 2008)
+insert into car values('KA 20 Q 2974', 'TOYOTA', 2010)
+insert into car values('KA 19 P 9723', 'TOYOTA', 2012)
+insert into car values('KA 19 F 4894', 'TOYOTA', 2016)
+insert into car values('KA 19 H 5489', 'TOYOTA', 2020)
+insert into car values('KA 19 K 5784', 'TOYOTA', 2021)
+
+CREATE TABLE accident
+
+(
+
+REPORT_NUMBER INT,
+
+ACCIDENT_DATE DATE,
+
+LOCATION VARCHAR(30),
+
+PRIMARY KEY(REPORT_NUMBER,ACCIDENT_DATE)
+
+)
+
+insert into accident values(100, '2008-05-12', 'KARKALA')
+insert into accident values(200, '2012-04-11', 'MANGALORE')
+insert into accident values(300, '2008-08-02', 'UDUPI')
+insert into accident values(500, '2008-01-18', 'UDUPI')
+insert into accident values(600, '2008-11-07', 'SURATHKAL')
+insert into accident values(700, '2020-12-04', 'KARKALA')
+
+
+CREATE TABLE owns
+
+(
+
+ DRIVER_ID VARCHAR(30),
+
+ REGNO VARCHAR(20),
+
+ PRIMARY KEY(DRIVER_ID, REGNO),
+
+ FOREIGN KEY(DRIVER_ID) REFERENCES person(DRIVER_ID),
+
+ FOREIGN KEY(REGNO) REFERENCES car(REGNO)
+
+)
+
+insert into owns values('1234','ka37k32');
+insert into owns values('2345','ka05d34');
+insert into owns values('3412','ka23j90');
+insert into owns values('4567','ka35f45');
+insert into owns values('4522','ka36m78');
+insert into participated values('1234','ka37k32',12,12000);
+insert into participated values('2345','ka05d34',34,13000);
+insert into participated values('3412','ka23j90',56,14000);
+insert into participated values('4567','ka35f45',67,12450);
+insert into participated values('4522','ka36m78',87,10000);
+
+
+CREATE TABLE participated
+
+(
+
+ DRIVER_ID VARCHAR(30),
+
+ REGNO VARCHAR(20),
+
+ REPORT_NUMBER INT,
+
+ ACCIDENT_DATE DATE,
+
+  DAMAGE_AMOUNT INT,
+
+ PRIMARY KEY(DRIVER_ID, REGNO, REPORT_NUMBER, ACCIDENT_DATE),
+
+ FOREIGN KEY(DRIVER_ID) REFERENCES person(DRIVER_ID),
+
+ FOREIGN KEY(REGNO) REFERENCES car(REGNO),
+
+
+
+
+)
+
+alter table participated add constraint fk1 foreign key(REPORT_NUMBER,ACCIDENT_DATE) references accident(REPORT_NUMBER,ACCIDENT_DATE)
